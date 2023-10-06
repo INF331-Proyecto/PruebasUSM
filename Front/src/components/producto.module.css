@@ -1,0 +1,82 @@
+.square-button,
+.square-button-checked {
+    flex-direction: "row";
+    flex-wrap: "wrap";
+    width: 10%;
+    align-items: center;
+    justify-content: center;
+    height: 40px; /* Set a fixed height for consistency */
+    border: 1px solid #ccc; /* Add border for button appearance */
+    cursor: pointer;
+	text-decoration: none;
+	text-wrap: nowrap;
+	cursor: pointer;
+	color: black;
+	padding: 0.4rem;
+	margin: 0.5rem;
+	border: 0.1rem solid var(--primary-color);
+	border-radius: 1rem;
+}
+
+.square-button-label {
+    width: 50px;
+}
+
+
+.square-button:hover {
+	color: black;
+	background-color: var(--alt-background);
+	border-color: var(--primary-color);
+}
+
+.square-button input,
+.square-button-checked input {
+	display: none;
+}
+
+.square-button-checked {
+	color: white;
+	background-color: var(--alt-text-color);
+	border-color: var(--primary-color);
+}
+
+.laber {
+    text-align: "center";
+}
+
+
+.f-container{
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 20px;
+  }
+  
+
+  @media screen and (min-width: 768px) {
+	.f-container {
+	  grid-template-columns: repeat(4, 1fr); 
+	  grid-template-rows: repeat(3, 1fr);
+	  gap: 30px;
+	}
+  }
+
+.item {
+	width: 100%;
+	max-width: 300px;
+	max-height: 40%;
+	height: auto;
+	position: relative;
+}
+  
+
+@media screen and (min-width: 768px) {
+	.item {
+	  width: auto; 
+	  max-width: 100%; 
+	}
+}
+
+.sell{
+	position: absolute;
+	bottom: 0;
+}
