@@ -7,9 +7,7 @@
 		"build": "next build",
 		"export": "npm run export",
 		"start": "next start",
-		"format": "prettier --write .",
-		"lint": "eslint --fix . --ext .js,.jsx",
-		"prepare": "husky install"
+		"lint": "eslint --fix . --ext .js,.jsx"
 	},
 	"dependencies": {
 		"bootstrap": "^5.3.1",
