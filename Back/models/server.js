@@ -5,6 +5,7 @@ import { createServer } from 'http'
 import { dbConnection } from '../helpers/database.js'
 import { env } from "custom-env";
 import routerProducts from "../routes/products.js"
+import multer from 'multer';
 env();
 
 class Server {
@@ -43,8 +44,11 @@ class Server {
 
   routes() {
 
+    const inMemoryStorage = multer.memoryStorage();
+    const upload = multer({ storage: inMemoryStorage });
+
     // Rutas API
-    this.app.use('/products', routerProducts)
+    this.app.use('/products', upload.single('image'), routerProducts)
     //this.app.use('/api/campaigns', upload.single('file'), require('../routes/campaigns'));
   }
 
