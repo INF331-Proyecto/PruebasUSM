@@ -31,9 +31,32 @@ const deleteProduct = async (req, res = response) => {
     res.json(product)
 }
 
+const updateProduct = async (req, res = response) => {
+    const id = req.body.id
+    const product = await Product.findById(id)
+    if (!product) {
+        return res.status(404).send({ message: "Product not found with id " + id });
+    }
+    if (!req.body.name && !req.body.price) {
+        return res.status(400).send({ message: "Content can not be empty!" });
+    }
+    let { name, price } = req.body
+    name = name ? name : product.name
+    price = price ? price : product.price
+    product.name = name
+    product.price = price
+    const saved = await product.save()
+    //delete saved image
+    const retorno = saved.toObject()
+    delete retorno.image
+    delete retorno.__v
+    res.json(retorno)
+}
+
 //export
 export {
     getProducts,
     createProduct,
-    deleteProduct
+    deleteProduct,
+    updateProduct
 }

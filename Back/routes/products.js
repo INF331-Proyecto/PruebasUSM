@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { getProducts, createProduct, deleteProduct } from '../controllers/products.js'
+import { getProducts, createProduct, deleteProduct, updateProduct } from '../controllers/products.js'
 
 const router = Router();
 
@@ -16,6 +16,11 @@ router.post(
 router.delete(
     '/',
     deleteProduct
+)
+
+router.patch(
+    '/',
+    updateProduct
 )
 
 export default router;
