@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 export default function Homes() {
 
 	useEffect(() => {
-		fetch('http://localhost:5000')
+		fetch('http://localhost:5000/products')
 		.then((res)=> res.json())
 		.then((data)=> setProductoGuardados(data));
 	}, []);
