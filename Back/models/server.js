@@ -1,62 +1,25 @@
-
-import express from 'express'
-import cors from 'cors'
-import { createServer } from 'http'
-import { dbConnection } from '../helpers/database.js'
+import express from "express";
+import cors from "cors";
+import { dbConnection } from "../helpers/database.js";
 import { env } from "custom-env";
-import routerProducts from "../routes/products.js"
-import multer from 'multer';
+import routerProducts from "../routes/products.js";
+import multer from "multer";
 env();
 
-class Server {
+const app = express();
 
-  constructor() {
-    this.app = express();
-    this.port = process.env.PORT || 5000;
-    this.server = createServer(this.app);
+// db
+await dbConnection();
 
-    // Conectar a base de datos
-    this.connectDB();
+// CORS
+app.use(cors());
+// Lectura y parseo del body
+//app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
 
-    // Middlewares
-    this.middlewares();
+// routes
+const inMemoryStorage = multer.memoryStorage();
+const upload = multer({ storage: inMemoryStorage });
+app.use("/products", upload.single("image"), routerProducts);
 
-    // Rutas API
-    this.routes();
-  }
-
-  async connectDB() {
-    await dbConnection();
-  };
-
-  middlewares() {
-    // CORS
-    this.app.use(cors());
-
-    // Lectura y parseo del body
-    this.app.use(express.json());
-
-    // Parseo de application/x-www-form-urlencoded
-    //this.app.use(express.urlencoded({ extended: true }));
-    
-
-  }
-
-  routes() {
-
-    const inMemoryStorage = multer.memoryStorage();
-    const upload = multer({ storage: inMemoryStorage });
-
-    // Rutas API
-    this.app.use('/products', upload.single('image'), routerProducts)
-    //this.app.use('/api/campaigns', upload.single('file'), require('../routes/campaigns'));
-  }
-
-  listen() {
-      this.server.listen(this.port, () => {
-      console.log(`Servidor: Online - Puerto ${this.port} `);
-		});
-	}
-}
-
-export default Server;
+export default app;
