@@ -17,6 +17,7 @@
 		"react-bootstrap-pagination-control": "^1.0.5",
 		"react-dom": "18.2.0",
 		"react-icons": "^4.11.0",
+		"react-range-slider-input": "^3.0.7",
 		"rut.js": "^2.1.0"
 	},
 	"devDependencies": {
