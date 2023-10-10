@@ -1,44 +1,43 @@
 {
-	"name": "lpwww",
-	"version": "0.1.0",
-	"private": true,
-	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
-		"export": "npm run export",
-		"start": "next start",
-		"lint": "eslint --fix . --ext .js,.jsx"
-	},
-	"dependencies": {
-		"bootstrap": "^5.3.1",
-		"next": "13.4.19",
-		"react": "^18.2.0",
-		"react-bootstrap": "^2.8.0",
-		"react-bootstrap-pagination-control": "^1.0.5",
-		"react-dom": "18.2.0",
-		"react-icons": "^4.11.0",
-		"react-range-slider-input": "^3.0.7",
-		"rut.js": "^2.1.0"
-	},
-	"devDependencies": {
-		"eslint": "^8.48.0",
-		"eslint-config-prettier": "^9.0.0",
-		"eslint-config-standard": "^17.1.0",
-		"eslint-plugin-import": "^2.28.1",
-		"eslint-plugin-n": "^16.0.2",
-		"eslint-plugin-promise": "^6.1.1",
-		"eslint-plugin-react": "^7.33.2",
-		"husky": "^8.0.3",
-		"lint-staged": "^14.0.1",
-		"prettier": "^3.0.3",
-		"sass": "^1.66.1"
-	},
-	"lint-staged": {
-		"*.{js,jsx,ts,tsx}": [
-			"eslint --fix"
-		],
-		"*.{json,js,ts,jsx,tsx,html,scss}": [
-			"prettier --write"
-		]
-	}
+  "name": "lpwww",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "export": "npm run export",
+    "start": "next start",
+    "lint": "eslint --fix . --ext .js,.jsx"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.1",
+    "next": "13.4.19",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.8.0",
+    "react-bootstrap-pagination-control": "^1.0.5",
+    "react-dom": "18.2.0",
+    "react-icons": "^4.11.0",
+    "react-range-slider-input": "^3.0.7"
+  },
+  "devDependencies": {
+    "eslint": "^8.48.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-n": "^16.0.2",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.33.2",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3",
+    "sass": "^1.66.1"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ],
+    "*.{json,js,ts,jsx,tsx,html,scss}": [
+      "prettier --write"
+    ]
+  }
 }

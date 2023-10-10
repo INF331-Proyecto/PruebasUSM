@@ -1,3 +1,26 @@
-Como iniciar
+# Proyecto Pruebas de Software
 
-Ejecutar el font-end y el back-end en dos terminales distintas e instalar las dependencias nesesarias para cada uno con "npm install" y despues ejecutar "npm run dev" para inciar cada uno.
+Este proyecto es la creación de una tienda de e-commerce de ropa. Idealmente se utilizará como espacio de acercamiento con herramientas de testeo de programa. En este proyecto, utilizaremos Mern, Mocha y Chai para desarrollo y testing.
+
+## Como Usar
+
+### Backend
+
+Entar por la consola a la carpeta /Back
+Instalar las dependencias:
+`npm i`
+
+Hacer funcionar:
+`npm start`
+
+En el caso de querer correr los tests:
+`npm test`
+
+### Frontend
+
+Entrar por la consola a la carpeta /Front
+Instalar las dependencias:
+`npm i`
+
+Hacer funcionar:
+`npm run dev`
