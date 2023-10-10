@@ -23,6 +23,8 @@ describe("Products", () => {
           name: "Coca Cola",
           price: 1200,
           image: file,
+          description: "Una bebida refrescante",
+          amount: 5,
         })
         .attach("image", imagepath)
         .end((err, res) => {
@@ -30,6 +32,8 @@ describe("Products", () => {
           expect(res.body).to.have.property("_id");
           expect(res.body).to.have.property("name");
           expect(res.body).to.have.property("price");
+          expect(res.body).to.have.property("description");
+          expect(res.body).to.have.property("amount");
           createdProductID = res.body._id;
           done();
         });
@@ -47,6 +51,8 @@ describe("Products", () => {
           expect(res.body[0]).to.have.property("name");
           expect(res.body[0]).to.have.property("price");
           expect(res.body[0]).to.have.property("image");
+          expect(res.body[0]).to.have.property("description");
+          expect(res.body[0]).to.have.property("amount");
           done();
         });
     });
@@ -65,6 +71,8 @@ describe("Products", () => {
           expect(res.body).to.have.property("_id");
           expect(res.body).to.have.property("name");
           expect(res.body).to.have.property("price");
+          expect(res.body).to.have.property("description");
+          expect(res.body).to.have.property("amount");
           expect(res.body.name).to.equal("Coke");
           done();
         });
