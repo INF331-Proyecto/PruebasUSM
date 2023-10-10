@@ -5,8 +5,8 @@
     width: 10%;
     align-items: center;
     justify-content: center;
-    height: 40px; /* Set a fixed height for consistency */
-    border: 1px solid #ccc; /* Add border for button appearance */
+    height: 40px;
+    border: 1px solid #ccc; 
     cursor: pointer;
 	text-decoration: none;
 	text-wrap: nowrap;

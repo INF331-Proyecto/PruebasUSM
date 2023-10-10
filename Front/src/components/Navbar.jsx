@@ -22,7 +22,7 @@ export default function Navbar() {
 					type='button'
 					data-bs-toggle='collapse'
 					data-bs-target='#Navbar'
-					aria-expanded='false'
+					aria-expanded='false'	
 					aria-label='Toggle navigation'
 				>
 					<span className='navbar-toggler-icon'></span>
