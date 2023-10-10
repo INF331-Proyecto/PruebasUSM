@@ -3,9 +3,10 @@ import { useState, useEffect } from 'react';
 import styles from './index.module.css';
 
 export default function PrestamosTablaAdmin({ }) {
-
+	const [value, setValue] = useState([30, 60]);
 	const [productos, setProductos] = useState([]);
-	const [selectedProduct, setSelectedProduct] = useState({});
+	const [selectedProduct, setSelectedProduct] = useState({
+	});
 
 	const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);	
@@ -28,13 +29,46 @@ export default function PrestamosTablaAdmin({ }) {
 		  	[field]: value,
 		}));
 	};
+
+	const handleImageChange = (e) => {
+		const file = e.target.files[0];
+		setSelectedProduct((prevProduct) => ({
+			...prevProduct,
+			image: file,
+		}));
+	};
 	  
-	const handleSaveChanges = () => {
+	const handleSaveChanges = async() => {
 		const updatedProductos = productos.map((producto) =>
-		  producto.id === selectedProduct.id ? selectedProduct : producto
+		  producto._id === selectedProduct._id ? selectedProduct : producto
 		);
 		setProductos(updatedProductos);
 		setSelectedProduct(null);
+		console.log(selectedProduct);
+		const formDataToSend = new FormData();
+		formDataToSend.append('name', selectedProduct.name);
+		formDataToSend.append('price', selectedProduct.price);
+		formDataToSend.append('image', selectedProduct.image);
+		formDataToSend.append('description', selectedProduct.description);
+		formDataToSend.append('amount', selectedProduct.amount);
+
+		try {
+		const response = await fetch('http://localhost:5000/products', {
+			method: 'PATCH',
+			body: formDataToSend,
+		});
+
+		if (response.status === 200) {
+			const data = await response.json();
+			// Handle success, maybe fetch products again to update the list
+			console.log('Product edited:', data);
+		} else {
+			// Handle error, show an error message to the user
+			console.error('Error editing product 2:', response.statusText);
+		}
+		} catch (error) {
+		console.error('Error editing product 1:', error);
+		}
 		handleClose();
 	  };
 
@@ -55,7 +89,7 @@ export default function PrestamosTablaAdmin({ }) {
 			<tbody>
 				{productos &&
 					productos.map((producto) => (
-						<tr key={producto.id}>
+						<tr key={producto._id}>
 						<td className='align-middle text-center'>{producto.id}</td>
 						<td className='align-middle'>{producto.name}</td>
 						<td>{producto.description}</td>
@@ -86,31 +120,31 @@ export default function PrestamosTablaAdmin({ }) {
 							className="form-control"
 							id="nombre"
 							placeholder="Nombre"
-							value={selectedProduct ? selectedProduct.nombre : ''}
+							value={selectedProduct ? selectedProduct.name : ''}
 							onChange={(e) => handleInputChange('nombre', e.target.value)}
 						/>
 					</div>
 					<div className="form-group">
-						<label for="tag">Tag</label>
+						<label for="price">Precio</label>
 						<input
 						type="text"
 						className="form-control"
-						id="tag"
-						placeholder="tag"
-						value={selectedProduct ? selectedProduct.tag : ''}
-						onChange={(e) => handleInputChange('tag', e.target.value)}
+						id="price"
+						placeholder="Introduzca precio"
+						value={selectedProduct ? selectedProduct.price : ''}
+						onChange={(e) => handleInputChange('price', e.target.value)}
 						/>
 
 					</div>
 					<div className="form-group">
-						<label for="descripcion">Descripcion</label>
+						<label for="description">Descripcion</label>
 						<input
 						type="text"
 						className="form-control"
-						id="descripcion"
-						placeholder="descripcion"
-						value={selectedProduct ? selectedProduct.descripcion : ''}
-						onChange={(e) => handleInputChange('descripcion', e.target.value)}
+						id="description"
+						placeholder="description"
+						value={selectedProduct ? selectedProduct.description : ''}
+						onChange={(e) => handleInputChange('description', e.target.value)}
 						/>
 					</div>
 					<div className="form-group">
@@ -118,15 +152,22 @@ export default function PrestamosTablaAdmin({ }) {
 						<input
 						type="text"
 						className="form-control"
-						id="cantidad"
-						placeholder="cantidad"
-						value={selectedProduct ? selectedProduct.cantidad : ''}
-						onChange={(e) => handleInputChange('cantidad', e.target.value)}
+						id="amount"
+						placeholder="Añada cantidad"
+						value={selectedProduct ? selectedProduct.amount : ''}
+						onChange={(e) => handleInputChange('amount', e.target.value)}
 						/>
 					</div>
 					<div className="form-group">
 						<label for="imagen">Imagen</label>
-						<input type="file" className="form-control-file" id="imagen" />
+						<input
+							type="file"
+							accept="image/*"
+							className="form-control"
+							id="image"
+							onChange={handleImageChange}
+							required
+						/>
 					</div>
 				</form>
 			</Modal.Body>

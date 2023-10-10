@@ -2,16 +2,14 @@ import { useState, useRef, useEffect } from 'react';
 import { Row, Col, Form, Button, Modal } from 'react-bootstrap';
 import Layout from '@/components/Layout';
 import InventarioTable from './InventarioTable';
+import RangeSlider from "react-range-slider-input";
+import "react-range-slider-input/dist/style.css";
 
 export default function Inventario() {
 	const [show, setShow] = useState(false);
 	const [selectedProduct, setSelectedProduct] = useState({});
 	const [productoGuardados, setProductoGuardados] = useState([]);
-  	const [formData, setFormData] = useState({
-   		name: '',
-    	price: '',
-    	image: null,
-  	});
+	const [value, setValue] = useState([30, 60]);
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
@@ -48,10 +46,8 @@ export default function Inventario() {
 
 		if (response.status === 200) {
 			const data = await response.json();
-			// Handle success, maybe fetch products again to update the list
 			console.log('Product created:', data);
 		} else {
-			// Handle error, show an error message to the user
 			console.error('Error creating product 2:', response.statusText);
 		}
 		} catch (error) {
@@ -65,12 +61,12 @@ export default function Inventario() {
 			<Row>
 			<Col xs={12} md={2} >
 				<div>
-					<h2>Categorias</h2>
-					<ul>
-						<li>Materiales</li>
-						<li>Herramientas</li>
-						<li>Equipos</li>
-					</ul>
+					<h2>Filtros</h2>
+						<div className="title">Precio</div>
+      					<RangeSlider value={value} onInput={setValue} />
+
+					<div class="container">
+					</div>
 				</div>
 				<Button variant="primary">Filtrar</Button>
 			</Col>
@@ -132,7 +128,7 @@ export default function Inventario() {
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor="image">Image</label>
+						<label htmlFor="image">Imagen</label>
 						<input
 							type="file"
 							accept="image/*"

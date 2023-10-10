@@ -11,7 +11,7 @@ const createProduct = async (req, res = response) => {
     if (!req.body.name || !req.body.price || !req.file || !req.body.description) {
         return res.status(400).send({ message: "Content can not be empty!" });
     }
-    const { name, price , description, amount} = req.body
+    const { name, price, description, amount} = req.body
     const image = req.file.buffer
     const product = new Product({ name, image, price, description, amount})
     const saved = await product.save()
@@ -32,7 +32,7 @@ const deleteProduct = async (req, res = response) => {
 }
 
 const updateProduct = async (req, res = response) => {
-    const id = req.body.id
+    const id = req.body._id
     const product = await Product.findById(id)
     if (!product) {
         return res.status(404).send({ message: "Product not found with id " + id });
@@ -40,9 +40,11 @@ const updateProduct = async (req, res = response) => {
     if (!req.body.name && !req.body.price) {
         return res.status(400).send({ message: "Content can not be empty!" });
     }
-    let { name, price } = req.body
+    let { name, price , description, amount} = req.body
     name = name ? name : product.name
+    description ? description : product.description
     price = price ? price : product.price
+    amount = amount ? amount : product.amount
     product.name = name
     product.price = price
     const saved = await product.save()
