@@ -20,7 +20,7 @@ export default function Homes() {
 			<Col xs={12} md={2} >
 				<div className={styles["sidebar-grid"]}>
 					<h2>Categorias</h2>
-					<ul clas className={styles["sidebar-list"]}>
+					<ul className={styles["sidebar-list"]}>
 						<li>Materiales</li>
 						<li>Herramientas</li>
 						<li>Equipos</li>

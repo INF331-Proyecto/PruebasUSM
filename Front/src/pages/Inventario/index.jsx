@@ -5,6 +5,13 @@ import InventarioTable from './InventarioTable';
 
 export default function Inventario() {
 	const [show, setShow] = useState(false);
+	const [selectedProduct, setSelectedProduct] = useState({});
+	const [productoGuardados, setProductoGuardados] = useState([]);
+  	const [formData, setFormData] = useState({
+   		name: '',
+    	price: '',
+    	image: null,
+  	});
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
@@ -16,8 +23,40 @@ export default function Inventario() {
 		}));
 	};
 
-	const handleSaveChanges = () => {
-		//Aqui supongo que irian las llamadas al backend
+	const handleImageChange = (e) => {
+		const file = e.target.files[0];
+		setSelectedProduct((prevProduct) => ({
+			...prevProduct,
+			image: file,
+		}));
+	};
+
+	const handleSaveChanges = async () => {
+		console.log(selectedProduct);
+		const formDataToSend = new FormData();
+		formDataToSend.append('name', selectedProduct.name);
+		formDataToSend.append('price', selectedProduct.price);
+		formDataToSend.append('image', selectedProduct.image);
+		formDataToSend.append('description', selectedProduct.description);
+		formDataToSend.append('amount', selectedProduct.amount);
+
+		try {
+		const response = await fetch('http://localhost:5000/products', {
+			method: 'POST',
+			body: formDataToSend,
+		});
+
+		if (response.status === 200) {
+			const data = await response.json();
+			// Handle success, maybe fetch products again to update the list
+			console.log('Product created:', data);
+		} else {
+			// Handle error, show an error message to the user
+			console.error('Error creating product 2:', response.statusText);
+		}
+		} catch (error) {
+		console.error('Error creating product 1:', error);
+		}
 		handleClose();
 	  };
 
@@ -52,50 +91,57 @@ export default function Inventario() {
 			<Modal.Body>
 				<form>
 					<div className="form-group">
-						<label for="nombre">Nombre</label>
+						<label for="name">Nombre</label>
 						<input
 							type="text"
 							className="form-control"
-							id="nombre"
-							placeholder="Nombre"
-							onChange={(e) => handleInputChange('nombre', e.target.value)}
+							id="name"
+							placeholder="Introducir Nombre..."
+							onChange={(e) => handleInputChange('name', e.target.value)}
 						/>
 					</div>
 					<div className="form-group">
-						<label for="tag">Tag</label>
+						<label for="price">Precio</label>
 						<input
 						type="text"
 						className="form-control"
-						id="tag"
-						placeholder="tag"
-						onChange={(e) => handleInputChange('tag', e.target.value)}
+						id="price"
+						placeholder="Introducir precio..."
+						onChange={(e) => handleInputChange('price', e.target.value)}
 						/>
 
 					</div>
 					<div className="form-group">
-						<label for="descripcion">Descripcion</label>
+						<label for="description">Descripcion</label>
 						<input
 						type="text"
 						className="form-control"
-						id="descripcion"
-						placeholder="descripcion"
-						onChange={(e) => handleInputChange('descripcion', e.target.value)}
+						id="descriptiob"
+						placeholder="Introducir descripcion..."
+						onChange={(e) => handleInputChange('description', e.target.value)}
 						/>
 					</div>
 					<div className="form-group">
-						<label for="cantidad">Cantidad</label>
+						<label for="amount">Cantidad</label>
 						<input
 						type="text"
 						className="form-control"
-						id="cantidad"
-						placeholder="cantidad"
-						onChange={(e) => handleInputChange('cantidad', e.target.value)}
+						id="amount"
+						placeholder="Introducir numero..."
+						onChange={(e) => handleInputChange('amount', e.target.value)}
 						/>
 					</div>
 					<div className="form-group">
-						<label for="imagen">Imagen</label>
-						<input type="file" className="form-control-file" id="imagen" />
-					</div>
+						<label htmlFor="image">Image</label>
+						<input
+							type="file"
+							accept="image/*"
+							className="form-control"
+							id="image"
+							onChange={handleImageChange}
+							required
+						/>
+        			</div>
 				</form>
 			</Modal.Body>
 			<Modal.Footer>

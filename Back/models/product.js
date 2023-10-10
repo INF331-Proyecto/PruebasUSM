@@ -9,6 +9,14 @@ const productSchema = Schema({
     type: Number,
     required: true
   },
+  description: {
+    type: String,
+    required: true
+  },
+  amount: {
+    type: Number,
+    required: true,
+  },
   image: {
     type: Buffer,
   },

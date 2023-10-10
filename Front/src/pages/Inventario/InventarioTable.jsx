@@ -12,7 +12,7 @@ export default function PrestamosTablaAdmin({ }) {
 	const handleShow = () => setShow(true);
 
 	useEffect(() => {
-		fetch('http://localhost:5000')
+		fetch('http://localhost:5000/products')
 		.then((res)=> res.json())
 		.then((data)=> setProductos(data));
 	}, []);
@@ -46,8 +46,8 @@ export default function PrestamosTablaAdmin({ }) {
 				<tr className={styles['table-head']}>
 					<th className='text-center'>ID</th>
 					<th>Nombre</th>
-					<th>Tag</th>
 					<th>Descripcion</th>
+					<th className='text-center'>Precio</th>
 					<th className='text-center'>Cantidad</th>
 					<th> </th>
 				</tr>
@@ -57,10 +57,10 @@ export default function PrestamosTablaAdmin({ }) {
 					productos.map((producto) => (
 						<tr key={producto.id}>
 						<td className='align-middle text-center'>{producto.id}</td>
-						<td className='align-middle'>{producto.nombre}</td>
-						<td>{producto.tag}</td>
-						<td>{producto.descripcion}</td>
-						<td className='align-middle text-center'>{producto.cantidad}</td>
+						<td className='align-middle'>{producto.name}</td>
+						<td>{producto.description}</td>
+						<td className='align-middle text-center'>{producto.price}</td>
+						<td className='align-middle text-center'>{producto.amount}</td>
 						<td>
 							<Button onClick={() => handleEdit(producto)}>Editar</Button>
 						</td>

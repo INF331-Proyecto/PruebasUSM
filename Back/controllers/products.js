@@ -8,12 +8,12 @@ const getProducts = async (req, res = response) => {
 }
 
 const createProduct = async (req, res = response) => {
-    if (!req.body.name || !req.body.price || !req.file) {
+    if (!req.body.name || !req.body.price || !req.file || !req.body.description) {
         return res.status(400).send({ message: "Content can not be empty!" });
     }
-    const { name, price } = req.body
+    const { name, price , description, amount} = req.body
     const image = req.file.buffer
-    const product = new Product({ name, image, price })
+    const product = new Product({ name, image, price, description, amount})
     const saved = await product.save()
     //delete saved image
     const retorno = saved.toObject()
