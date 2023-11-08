@@ -30,6 +30,29 @@ export default function PrestamosTablaAdmin({ }) {
 		}));
 	};
 
+	const handleDeleteProduct = async () => {
+		const updatedProductos = productos.map((producto) =>
+		  producto._id === selectedProduct._id ? selectedProduct : producto
+		);
+		setProductos(updatedProductos);
+		setSelectedProduct(null);
+		console.log(selectedProduct);
+		const formDataToSend = new FormData();
+
+		formDataToSend.append('id', selectedProduct._id);
+
+		try {
+		const response = await fetch(`http://localhost:5000/products/${selectedProduct._id}`, {
+			method: 'DELETE',
+			});
+	  
+		handleClose();
+		} catch (error) {
+			console.error('Error deleting product:', error);
+		}
+	};
+	
+
 	const handleImageChange = (e) => {
 		const file = e.target.files[0];
 		setSelectedProduct((prevProduct) => ({
@@ -45,25 +68,20 @@ export default function PrestamosTablaAdmin({ }) {
 		setProductos(updatedProductos);
 		setSelectedProduct(null);
 		console.log(selectedProduct);
-		const formDataToSend = new FormData();
-		formDataToSend.append('name', selectedProduct.name);
-		formDataToSend.append('price', selectedProduct.price);
-		formDataToSend.append('image', selectedProduct.image);
-		formDataToSend.append('description', selectedProduct.description);
-		formDataToSend.append('amount', selectedProduct.amount);
 
 		try {
-		const response = await fetch('http://localhost:5000/products', {
-			method: 'PATCH',
-			body: formDataToSend,
-		});
+			const response = await fetch(`http://localhost:5000/products/${selectedProduct._id}`, {
+				method: 'PATCH',
+				headers: {
+				  	'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(selectedProduct), 
+			});
 
 		if (response.status === 200) {
 			const data = await response.json();
-			// Handle success, maybe fetch products again to update the list
 			console.log('Product edited:', data);
 		} else {
-			// Handle error, show an error message to the user
 			console.error('Error editing product 2:', response.statusText);
 		}
 		} catch (error) {
@@ -78,7 +96,6 @@ export default function PrestamosTablaAdmin({ }) {
 		<Table hover responsive className={`mt-3 mx-auto ${styles['inventario-table']}`}>
 			<thead>
 				<tr className={styles['table-head']}>
-					<th className='text-center'>ID</th>
 					<th>Nombre</th>
 					<th>Descripcion</th>
 					<th className='text-center'>Precio</th>
@@ -90,9 +107,8 @@ export default function PrestamosTablaAdmin({ }) {
 				{productos &&
 					productos.map((producto) => (
 						<tr key={producto._id}>
-						<td className='align-middle text-center'>{producto.id}</td>
 						<td className='align-middle'>{producto.name}</td>
-						<td>{producto.description}</td>
+						<td className='align-middle'>{producto.description}</td>
 						<td className='align-middle text-center'>{producto.price}</td>
 						<td className='align-middle text-center'>{producto.amount}</td>
 						<td>
@@ -178,6 +194,9 @@ export default function PrestamosTablaAdmin({ }) {
 				</Button>
 				<Button variant="primary" onClick={handleSaveChanges}>
 					Guardar cambios
+				</Button>
+				<Button variant="Caution" onClick={handleDeleteProduct} >
+					Eliminar
 				</Button>
 			</Modal.Footer>
 		</Modal>

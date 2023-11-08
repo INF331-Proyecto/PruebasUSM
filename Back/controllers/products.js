@@ -20,7 +20,6 @@ const createProduct = async (req, res = response) => {
   const image = req.file.buffer;
   const product = new Product({ name, image, price, description, amount });
   const saved = await product.save();
-  //delete saved image
   const retorno = saved.toObject();
   delete retorno.image;
   delete retorno.__v;
@@ -28,7 +27,8 @@ const createProduct = async (req, res = response) => {
 };
 
 const deleteProduct = async (req, res = response) => {
-  const id = req.body.id;
+  const id = req.params.id;
+  console.log(id);
   const product = await Product.findByIdAndDelete(id);
   if (!product) {
     return res.status(404).send({ message: "Product not found with id " + id });
@@ -37,7 +37,7 @@ const deleteProduct = async (req, res = response) => {
 };
 
 const updateProduct = async (req, res = response) => {
-  const id = req.body.id;
+  const id = req.params.id;
   const product = await Product.findById(id);
   if (!product) {
     return res.status(404).send({ message: "Product not found with id " + id });
@@ -50,6 +50,7 @@ const updateProduct = async (req, res = response) => {
   price = price ? price : product.price;
   product.name = name;
   product.price = price;
+  product.amount = req.body.amount;
   const saved = await product.save();
   //delete saved image
   const retorno = saved.toObject();
