@@ -1,0 +1,145 @@
+.categoria-dropdown-toggle,
+.categoria-dropdown-toggle:focus,
+.categoria-dropdown-toggle:hover {
+	color: black;
+	background-color: transparent !important;
+	border-color: var(--primary-color);
+	text-align: left;
+	width: 18rem;
+	min-width: 18rem;
+	color: var(--alt-text-color);
+}
+
+.estado-dropdown-toggle,
+.estado-dropdown-toggle:focus,
+.estado-dropdown-toggle:hover {
+	color: black;
+	background-color: transparent !important;
+	border-color: var(--primary-color);
+	text-align: left;
+	width: 20rem;
+	min-width: 20rem;
+	color: var(--alt-text-color);
+}
+
+.filter-dropdown-options:active {
+	background-color: var(--primary-color);
+	color: var(--alt-text-color);
+}
+
+.text-form {
+	border-color: var(--primary-color);
+	width: 20rem;
+	min-width: 14rem;
+	color: var(--alt-text-color);
+}
+
+.text-form:focus {
+	border-color: var(--primary-color);
+	box-shadow: 0.1rem 0.1rem 0.1rem var(--primary-color);
+	color: var(--alt-text-color);
+}
+
+.form-categoria-dropdown,
+.form-categoria-dropdown:focus,
+.form-categoria-dropdown:hover {
+	color: black;
+	background-color: transparent;
+	border-color: var(--primary-color);
+	text-align: left;
+	width: 20rem;
+	min-width: 20rem;
+	color: var(--alt-text-color);
+}
+
+.form-categoria-dropdown:focus {
+	box-shadow: 0.1rem 0.1rem 0.1rem var(--primary-color);
+}
+
+.form-categoria-dropdown option:hover {
+	background-color: var(--primary-color);
+	color: var(--alt-text-color);
+}
+
+.filter-checkbox,
+.filter-checkbox-checked {
+	text-decoration: none;
+	text-wrap: nowrap;
+	cursor: pointer;
+	color: black;
+	padding: 0.4rem;
+	margin: 0.5rem;
+	border: 0.1rem solid var(--primary-color);
+	border-radius: 1rem;
+}
+
+.filter-checkbox:hover {
+	color: black;
+	background-color: var(--alt-background);
+	border-color: var(--primary-color);
+}
+
+.filter-checkbox input,
+.filter-checkbox-checked input {
+	display: none;
+}
+
+.filter-checkbox-checked {
+	color: white;
+	background-color: var(--alt-text-color);
+	border-color: var(--primary-color);
+}
+
+.inventario-table {
+	max-width: 95%;
+	max-height: 100%;
+	overflow: hidden;
+}
+
+.table-head th {
+	color: var(--alt-text-color);
+}
+
+.alert-cantidad-popup {
+	background-color: var(--alt-background);
+	width: 10rem;
+	padding: 0.8rem;
+	border-radius: 0.8rem;
+	text-decoration: none;
+	display: block;
+	position: absolute;
+	right: 12%;
+	z-index: 1;
+}
+
+.producto-accion-opciones {
+	text-wrap: nowrap;
+	background-color: var(--alt-background);
+	padding: 0.8rem;
+	border-radius: 0.8rem;
+	text-decoration: none;
+	display: block;
+	position: absolute;
+	right: 2%;
+	z-index: 2;
+}
+
+@media (min-width: 768px) {
+	.filter-selection {
+		border-right: 0.1rem solid var(--alt-text-color);
+		height: 100%;
+	}
+}
+
+.td{
+	display: 'flex';
+}
+
+.container {
+	text-align: center; 
+  }
+  
+  .left, .right {
+	display: inline-block;
+  }
+  

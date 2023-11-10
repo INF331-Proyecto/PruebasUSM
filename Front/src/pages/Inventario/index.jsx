@@ -54,7 +54,7 @@ export default function Inventario() {
 		console.error('Error creating product 1:', error);
 		}
 		handleClose();
-	  };
+	};
 
 	return (
 		<Layout>

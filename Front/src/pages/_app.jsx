@@ -6,12 +6,6 @@ import '@/pages/globals.scss';
 
 function MyApp({ Component, pageProps }) {
 	const { authenticated } = useContext(AuthContext);
-	const router = useRouter();
-
-	useEffect(() => {
-		if (!authenticated) router.push('/');
-	}, [authenticated]);
-
 	return (
 		<AuthProvider>
 			<Script
