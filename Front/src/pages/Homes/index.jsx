@@ -30,7 +30,7 @@ export default function Homes() {
       <Row>
         <Col xs={12} md={2}>
           <div className={styles["sidebar-grid"]}>
-            <h2>Filtros</h2>
+            <h2>Filtros:</h2>
             <div>Precio</div>
             <RangeSlider value={value} onInput={setValue} />
             <ul className={styles["sidebar-list"]}>
