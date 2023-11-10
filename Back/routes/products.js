@@ -14,12 +14,12 @@ router.post(
 )
 
 router.delete(
-    '/',
+    '/:id',
     deleteProduct
-)
+);
 
 router.patch(
-    '/',
+    '/:id',
     updateProduct
 )
 

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { AuthContext } from '@/components/SessionContext';
@@ -6,11 +6,28 @@ import { AuthContext } from '@/components/SessionContext';
 export default function Navbar() {
 	const { setAuthenticated } = useContext(AuthContext);
 	const router = useRouter();
-	const { tipoUsuario } = useContext(AuthContext);
 	const handleCerrarSesion = () => {
 		setAuthenticated(false);
 		router.push('/');
 	};
+	const [loggedIn, setLoggedIn] = useState(false);
+
+	const isLoggedIn = () => {
+        if (typeof window !== 'undefined') {
+            const token = localStorage.getItem('email');
+            return !!token;
+        }
+        return false;
+    };
+      
+    const checkLoginStatus = () => {
+        setLoggedIn(isLoggedIn());
+    };
+      
+    useEffect(() => {
+        checkLoginStatus();
+    }, []);
+
 	return (
 		<nav className='navbar navbar-expand-lg navbar-light bg-light'>
 			<div className='container-fluid'>
@@ -37,9 +54,9 @@ export default function Navbar() {
 					</ul>
 					<ul className='navbar-nav ms-auto mb-2 mb-lg-0'>
 						<li className='nav-item'>
-							<a className='nav-link' style={{ cursor: 'pointer' }} onClick={handleCerrarSesion}>
-								Cerrar Sesión
-							</a>
+							<Link className='nav-link' href='/Login'>
+								Crear Cuenta / Login
+							</Link>
 						</li>
 					</ul>
 				</form>
