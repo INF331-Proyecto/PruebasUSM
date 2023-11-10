@@ -20,7 +20,7 @@ export default function Homes() {
 	  }, [ProductoGuardados]);*/
 
   useEffect(() => {
-    fetch("http://20.231.216.22/products")
+    fetch("http://20.231.216.22:5000/products")
       .then((res) => res.json())
       .then((data) => setProductoGuardados(data));
   }, []);

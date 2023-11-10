@@ -39,7 +39,7 @@ export default function Inventario() {
     formDataToSend.append("amount", selectedProduct.amount);
 
     try {
-      const response = await fetch("http://20.231.216.22/products", {
+      const response = await fetch("http://20.231.216.22:5000/products", {
         method: "POST",
         body: formDataToSend,
       });

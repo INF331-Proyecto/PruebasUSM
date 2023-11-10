@@ -12,7 +12,7 @@ export default function PrestamosTablaAdmin({}) {
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    fetch("http://20.231.216.22/products")
+    fetch("http://20.231.216.22:5000/products")
       .then((res) => res.json())
       .then((data) => setProductos(data));
   }, []);
@@ -42,7 +42,7 @@ export default function PrestamosTablaAdmin({}) {
 
     try {
       const response = await fetch(
-        `http://20.231.216.22/products/${selectedProduct._id}`,
+        `http://20.231.216.22:5000/products/${selectedProduct._id}`,
         {
           method: "DELETE",
         }
@@ -72,7 +72,7 @@ export default function PrestamosTablaAdmin({}) {
 
     try {
       const response = await fetch(
-        `http://20.231.216.22/products/${selectedProduct._id}`,
+        `http://20.231.216.22:5000/products/${selectedProduct._id}`,
         {
           method: "PATCH",
           headers: {
