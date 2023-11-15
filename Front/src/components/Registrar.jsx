@@ -24,7 +24,7 @@ const Register = ({ onRegister }) => {
                     onChange={(e) => setEmail(e.target.value)}
 				/>
 			</div>
-            <div className="form-group" style={{marginBottom: "1rem"}}>
+            <div className="form-group">
 				<label for="password">Contraseña</label>
 				<input
 					type="password"
@@ -32,6 +32,15 @@ const Register = ({ onRegister }) => {
 					id="contraseña"
 					placeholder="Contraseña"
                     onChange={(e) => setPassword(e.target.value)}
+				/>
+			</div>
+            <div className="form-group" style={{marginBottom: "1rem"}}>
+				<label for="password2">Vuelva a escribir Contraseña</label>
+				<input
+					type="password"
+					className="form-control"
+					id="contraseña2"
+					placeholder="Contraseña"
 				/>
 			</div>
             <Button variant="primary" onClick={handleSubmit} >

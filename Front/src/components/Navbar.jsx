@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { AuthContext } from '@/components/SessionContext';
+import Carrito from './Carrito';
 
 export default function Navbar() {
 	const { setAuthenticated } = useContext(AuthContext);
@@ -13,11 +14,15 @@ export default function Navbar() {
 	const [loggedIn, setLoggedIn] = useState(false);
 
 	const isLoggedIn = () => {
-        if (typeof window !== 'undefined') {
-            const token = localStorage.getItem('email');
-            return !!token;
+        if (localStorage.getItem('email') != null) {
+            return true;
         }
         return false;
+    };
+
+	const handleLogout = () => {
+        localStorage.removeItem('email');
+        setLoggedIn(false);
     };
       
     const checkLoginStatus = () => {
@@ -32,7 +37,7 @@ export default function Navbar() {
 		<nav className='navbar navbar-expand-lg navbar-light bg-light'>
 			<div className='container-fluid'>
 				<Link className='navbar-brand' href='/Homes'>
-					Home
+					Fashion Shop
 				</Link>
 				<button
 					className='navbar-toggler'
@@ -53,10 +58,21 @@ export default function Navbar() {
 					</li>
 					</ul>
 					<ul className='navbar-nav ms-auto mb-2 mb-lg-0'>
+					<Carrito/>
 						<li className='nav-item'>
-							<Link className='nav-link' href='/Login'>
-								Crear Cuenta / Login
-							</Link>
+							{!loggedIn ? (
+								<Link className='nav-link' href='/Login'>
+									Crear Cuenta / Login
+								</Link>
+							) : (
+								<div>
+									{localStorage.getItem('email')}
+								
+								<Link className='nav-link' href='/Homes' onClick={handleLogout}>
+									Cerrar Sesion
+								</Link>
+								</div>
+							)}							
 						</li>
 					</ul>
 				</form>
