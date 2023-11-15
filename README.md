@@ -24,6 +24,3 @@ Instalar las dependencias:
 
 Hacer funcionar:
 `npm run dev`
-
-Now running in:
-http://20.231.216.22/Homes
