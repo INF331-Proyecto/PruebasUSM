@@ -3,6 +3,7 @@ import cors from "cors";
 import { dbConnection } from "../helpers/database.js";
 import { env } from "custom-env";
 import routerProducts from "../routes/products.js";
+import routerAuth from "../routes/auth.js";
 import multer from "multer";
 env();
 
@@ -22,5 +23,6 @@ app.use(express.json({ limit: "50mb" }));
 const inMemoryStorage = multer.memoryStorage();
 const upload = multer({ storage: inMemoryStorage });
 app.use("/products", upload.single("image"), routerProducts);
+app.use("/login", upload.none(), routerAuth);
 
 export default app;
