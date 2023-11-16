@@ -7,6 +7,14 @@ export const CartProvider = ({ children }) => {
     const [total, setTotal] = useState(0);
     const [totalItems, setTotalItems] = useState(0);
 
+    const removeFromCart = (itemToRemove) => {
+        setCartItems(
+            cartItems.filter((item) => item !== itemToRemove)
+        );
+        setTotal(total - itemToRemove.price * itemToRemove.quanty);
+        setTotalItems(totalItems - itemToRemove.quanty);
+    }
+
     const addToCart = (item) => {
         console.log(item);
         if (cartItems.some((i) => i._id === item._id)) {
@@ -24,9 +32,9 @@ export const CartProvider = ({ children }) => {
         setTotalItems(totalItems + 1);
         setCartItems((prevItems) => [...prevItems, item]);
     };
-
+ 
     return (
-        <CartContext.Provider value={{ cartItems, addToCart, total, totalItems }}>
+       <CartContext.Provider value={{ cartItems, addToCart, total, totalItems, removeFromCart }}>
         {children}
         </CartContext.Provider>
     );

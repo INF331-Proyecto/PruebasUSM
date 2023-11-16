@@ -4,7 +4,7 @@ import { useCart} from '@/context/context';
 
 const Carrito = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const { cartItems, total, totalItems } = useCart();
+    const { cartItems, total, totalItems, removeFromCart } = useCart();
     const cartRef = useRef(null);
     const buttonRef = useRef(null);
   
@@ -44,7 +44,9 @@ const Carrito = () => {
                     <div>
                         <ul>
                         {cartItems.map((item, index) => (
-                            <li key={index}>{item.name} ${item.price} x {item.quanty}</li>
+                            <li key={index}>
+                                {item.name} ${item.price} x {item.quanty} <Button onClick={() => removeFromCart(item)}>Quitar</Button>
+                            </li>
                         ))}
                         </ul>
                         <Button style={{marginTop:"2rem"}}>Comprar ${total}</Button>
