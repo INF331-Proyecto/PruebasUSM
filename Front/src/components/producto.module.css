@@ -22,7 +22,6 @@
     width: 50px;
 }
 
-
 .square-button:hover {
 	color: black;
 	background-color: var(--alt-background);
