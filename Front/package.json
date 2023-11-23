@@ -7,17 +7,22 @@
     "build": "next build",
     "export": "next export",
     "start": "next start",
-    "lint": "eslint --fix . --ext .js,.jsx"
+    "lint": "eslint --fix . --ext .js,.jsx",
+    "test": "mocha tests/main.js --timeout 10000"
   },
   "dependencies": {
     "bootstrap": "^5.3.1",
+    "chai": "^4.3.10",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^10.2.0",
     "next": "13.4.19",
     "react": "^18.2.0",
     "react-bootstrap": "^2.8.0",
     "react-bootstrap-pagination-control": "^1.0.5",
     "react-dom": "18.2.0",
     "react-icons": "^4.11.0",
-    "react-range-slider-input": "^3.0.7"
+    "react-range-slider-input": "^3.0.7",
+    "selenium-webdriver": "^4.15.0"
   },
   "devDependencies": {
     "eslint": "^8.48.0",
